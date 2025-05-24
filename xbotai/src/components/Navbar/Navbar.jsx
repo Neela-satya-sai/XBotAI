@@ -7,10 +7,10 @@ import pencile from "../../assets/image 31.png"
 function Navbar() {
   return (
     <nav className={styles.navbar_wrapper}>
-      <Stack>
+      <Stack className={styles.navItems} >
         <Stack direction={"row"} className={styles.newChat_wrapper}> <img src={logo} alt="logo img" className={styles.logo} />  <span className={styles.newChat}> New Chat</span> <img src={pencile} alt="pencile icon" className={styles.pencile} />  </Stack>
-      <Button>New Chat</Button>
-      <Button>past convesation</Button>
+  
+      <Button className={styles.buttonHistory}>past convesation</Button>
       </Stack>
      
     </nav>
