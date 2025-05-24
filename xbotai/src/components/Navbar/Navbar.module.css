@@ -1,0 +1,24 @@
+.navbar_wrapper{
+  width: 25vw;
+  height: 100vh;
+  background-color: #FFFFFF;
+}
+
+.newChat{
+   font-family: inherit;
+}
+
+.newChat_wrapper{
+  display: flex;
+  gap: 1;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #9785BA ;
+  padding: 10px;
+}
+.logo{
+  border-radius: 5px;
+}
+.pencile{
+  object-fit: cover;
+}
