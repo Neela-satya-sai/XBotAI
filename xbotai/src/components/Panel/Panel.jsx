@@ -34,8 +34,10 @@ function Panel({
   // chatHistory ==>   [  ]
   const [final, setFinal] = useState([]);
   const navigate = useNavigate();
+
+
   useEffect(()=>{
-    if(chat.user.length>0){
+    if( chat && chat.user && chat.user.length>0){
       let array =[];
       console.log("from chat useeffect", chat);
       for (let i = 0; i < chat.user.length; i++) {
@@ -55,18 +57,7 @@ function Panel({
   },[chat]);
 
 
-  function getTimeStamp() {
-    const now = new Date();
-
-    const day = now.getDate(); // Day of the month (1-31)
-    const month = now.getMonth() + 1; // Month (0-11, so add 1)
-    const year = now.getFullYear(); // Full year (YYYY)
-    const hours = now.getHours(); // Hours (0-23)
-    const minutes = now.getMinutes(); // Minutes (0-59)
-    const seconds = now.getSeconds(); // Seconds (0-59)
-
-    return `Timestamp: ${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
-  }
+  
 
   
 
@@ -85,14 +76,14 @@ function Panel({
 
   
 
-  useEffect(() => {
-    if (chat.user.length > 0) {
-      setFinal(chat.user.map((userMsg, i) => ([
-        { role: "User", text: userMsg },
-        { role: "Soul AI", text: chat.ai[i] || "Sorry, did not understand your query!" }
-      ])).flat());
-    }
-  }, [chat]);
+  // useEffect(() => {
+  //   if (chat.user.length > 0) {
+  //     setFinal(chat.user.map((userMsg, i) => ([
+  //       { role: "User", text: userMsg },
+  //       { role: "Soul AI", text: chat.ai[i] || "Sorry, did not understand your query!" }
+  //     ])).flat());
+  //   }
+  // }, [chat]);
 
   
   
@@ -139,7 +130,7 @@ function Panel({
     <section className={styles.panel_wrapper}>
       <span className={styles.botai}>Bot AI</span>
 
-      {chat.user.length > 0 ? (
+       {chat && chat.user && chat.user.length > 0 ? (
         <div>
               <div className={styles.chatCard_wrapper}>
                 {final.map((message, idx) => (
