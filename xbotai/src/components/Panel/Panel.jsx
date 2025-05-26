@@ -119,8 +119,9 @@ function Panel({
 
   return (
     <section className={styles.panel_wrapper}>
-      <header> <div className={styles.botai}>{history ? "Conversation History": "Bot AI"}</div></header>
-
+   
+      <header>  {history && <div> Conversation History</div>}  {home &&  <h1 className={styles.botai}> Bot AI</h1>}  </header>
+    
       {chat && chat.user && chat.user.length > 0 ? (
         <div>
           <div className={styles.chatCard_wrapper}>
@@ -147,6 +148,7 @@ function Panel({
               <Button className={styles.button} type={"submit"}>
                 Ask
               </Button>
+
               <Button
                 className={styles.button}
                 type={"button"}
@@ -211,7 +213,6 @@ function Panel({
                   alignItems={"center"}
                 >
                   <input
-                    // sx={{ width: "80%" }}
                     className={styles.textfield}
                     required
                     name={"inputText"}
