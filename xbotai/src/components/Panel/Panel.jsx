@@ -7,6 +7,7 @@ import { Form, useNavigate } from "react-router-dom";
 import aiRes from "../../data/aiResponse.json";
 import { SnackbarProvider, enqueueSnackbar } from "notistack";
 import ChatCard from "../ChatCard/ChatCard";
+import ConversationHistory from "../ConversationHistory/ConversationHistory";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
@@ -21,6 +22,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 function Panel({
   home,
+  history,
   userText,
   changeUserText,
   aiText,
@@ -35,10 +37,9 @@ function Panel({
   const [final, setFinal] = useState([]);
   const navigate = useNavigate();
 
-
-  useEffect(()=>{
-    if( chat && chat.user && chat.user.length>0){
-      let array =[];
+  useEffect(() => {
+    if (chat && chat.user && chat.user.length > 0) {
+      let array = [];
       console.log("from chat useeffect", chat);
       for (let i = 0; i < chat.user.length; i++) {
         array.push({ role: "User", text: chat.user[i] });
@@ -53,13 +54,7 @@ function Panel({
       changeUserText("");
       changeAiText("");
     }
-  
-  },[chat]);
-
-
-  
-
-  
+  }, [chat]);
 
   function findClosestQuestion(userInput) {
     return aiRes.find((q) =>
@@ -72,10 +67,6 @@ function Panel({
     // console.log(matchedQuestion ? matchedQuestion.question : "No close match found");
   }
 
-
-
-  
-
   // useEffect(() => {
   //   if (chat.user.length > 0) {
   //     setFinal(chat.user.map((userMsg, i) => ([
@@ -85,26 +76,27 @@ function Panel({
   //   }
   // }, [chat]);
 
-  
-  
   function formSubmit(e) {
     e.preventDefault();
     const userQuestion = e.target.elements.inputText.value;
     const aiAnswer = findClosestQuestion(userQuestion);
-  
-    changeAiText(aiAnswer ? aiAnswer.response : "Sorry, did not understand your query!");
-  
-    setChat(prevChat => ({
+
+    changeAiText(
+      aiAnswer ? aiAnswer.response : "Sorry, did not understand your query!"
+    );
+
+    setChat((prevChat) => ({
       ...prevChat,
       user: [...prevChat.user, userQuestion],
-      ai: [...prevChat.ai, aiAnswer?.response || "Sorry, did not understand your query!"]
+      ai: [
+        ...prevChat.ai,
+        aiAnswer?.response || "Sorry, did not understand your query!",
+      ],
     }));
-  
+
     changeUserText(""); // Reset input after state update
-    changeAiText("");  // Reset AI response after state update
+    changeAiText(""); // Reset AI response after state update
   }
-
-
 
   function saveChat() {
     if (!chat.user[0]) {
@@ -125,92 +117,17 @@ function Panel({
     changeUserText(e.target.value); // Updates the state
   }
 
-  
   return (
     <section className={styles.panel_wrapper}>
-      <span className={styles.botai}>Bot AI</span>
+      <span className={styles.botai}>{history ? "Conversation History": "Bot AI"}</span>
 
-       {chat && chat.user && chat.user.length > 0 ? (
+      {chat && chat.user && chat.user.length > 0 ? (
         <div>
-              <div className={styles.chatCard_wrapper}>
-                {final.map((message, idx) => (
-                  <ChatCard key={idx} role={message.role} text={message.text} />
-                ))}
-              </div>
-              <form onSubmit={formSubmit} className={styles.form_wrapper}>
-                <Box
-                  display={"flex"}
-                  justifyContent={"space-between"}
-                  alignItems={"center"}
-                >
-                  <TextField
-                    sx={{ width: "80%" }}
-                    className={styles.textfield}
-                    required
-                    name={"inputText"}
-                    value={userText}
-                    onChange={handleInput}
-                    placeholder="Message Bot AI…"
-                  />
-
-                  <Button className={styles.button} type={"submit"}>
-                    Ask
-                  </Button>
-                  <Button
-                    className={styles.button}
-                    type={"button"}
-                    onClick={saveChat}
-                  >
-                    Save
-                  </Button>
-                </Box>
-              </form>
-        </div>
-      ) : (
-        <>
-          <Box
-            className={styles.hero}
-            display={"flex"}
-            flexDirection={"column"}
-            justifyContent={"center"}
-            alignItems={"center"}
-          >
-            <h1>How Can I Help You Today?</h1>
-            <img src={logo} alt="logo img" className={styles.logo} />
-          </Box>
-          <Grid
-            container
-            spacing={2}
-            rowGap={3}
-            columnGap={2}
-            sx={{ gridTemplateRows: "repeat(2, 1fr)" }}
-            className={styles.questionCard}
-          >
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <Item>
-                {" "}
-                <QuestionCard></QuestionCard>
-              </Item>
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <Item>
-                {" "}
-                <QuestionCard></QuestionCard>
-              </Item>
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <Item>
-                {" "}
-                <QuestionCard></QuestionCard>
-              </Item>
-            </Grid>
-            <Grid size={{ xs: 12, sm: 6 }}>
-              <Item>
-                {" "}
-                <QuestionCard></QuestionCard>
-              </Item>
-            </Grid>
-          </Grid>
+          <div className={styles.chatCard_wrapper}>
+            {final.map((message, idx) => (
+              <ChatCard key={idx} role={message.role} text={message.text} />
+            ))}
+          </div>
           <form onSubmit={formSubmit} className={styles.form_wrapper}>
             <Box
               display={"flex"}
@@ -239,8 +156,89 @@ function Panel({
               </Button>
             </Box>
           </form>
+        </div>
+      ) : (
+        <>
+          {home && (
+            <>
+              <Box
+                className={styles.hero}
+                display={"flex"}
+                flexDirection={"column"}
+                justifyContent={"center"}
+                alignItems={"center"}
+              >
+                <h1>How Can I Help You Today?</h1>
+                <img src={logo} alt="logo img" className={styles.logo} />
+              </Box>
+              <Grid
+                container
+                spacing={2}
+                rowGap={3}
+                columnGap={2}
+                sx={{ gridTemplateRows: "repeat(2, 1fr)" }}
+                className={styles.questionCard}
+              >
+                <Grid size={{ xs: 12, sm: 6 }}>
+                  <Item>
+                    {" "}
+                    <QuestionCard></QuestionCard>
+                  </Item>
+                </Grid>
+                <Grid size={{ xs: 12, sm: 6 }}>
+                  <Item>
+                    {" "}
+                    <QuestionCard></QuestionCard>
+                  </Item>
+                </Grid>
+                <Grid size={{ xs: 12, sm: 6 }}>
+                  <Item>
+                    {" "}
+                    <QuestionCard></QuestionCard>
+                  </Item>
+                </Grid>
+                <Grid size={{ xs: 12, sm: 6 }}>
+                  <Item>
+                    {" "}
+                    <QuestionCard></QuestionCard>
+                  </Item>
+                </Grid>
+              </Grid>
+              <form onSubmit={formSubmit} className={styles.form_wrapper}>
+                <Box
+                  display={"flex"}
+                  justifyContent={"space-between"}
+                  alignItems={"center"}
+                >
+                  <TextField
+                    sx={{ width: "80%" }}
+                    className={styles.textfield}
+                    required
+                    name={"inputText"}
+                    value={userText}
+                    onChange={handleInput}
+                    placeholder="Message Bot AI…"
+                  />
+
+                  <Button className={styles.button} type={"submit"}>
+                    Ask
+                  </Button>
+                  <Button
+                    className={styles.button}
+                    type={"button"}
+                    onClick={saveChat}
+                  >
+                    Save
+                  </Button>
+                </Box>
+              </form>
+            </>
+          )}
         </>
       )}
+
+      {history && <ConversationHistory  chatHistory={chatHistory}
+ ></ConversationHistory>}
     </section>
   );
 }

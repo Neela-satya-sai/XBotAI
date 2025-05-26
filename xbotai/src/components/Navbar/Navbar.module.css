@@ -6,6 +6,8 @@
 
 .newChat{
    font-family: "ubantu";
+   color: #504469;
+   text-decoration: none;
 }
 
 .newChat_wrapper{
@@ -31,4 +33,8 @@
 
 .navItems{
   gap: 5px;
+}
+
+Link{
+  text-decoration: none;
 }
