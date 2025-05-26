@@ -15,7 +15,7 @@ function EachConversation({ eachConversation }) {
     for (let i = 0; i < eachConversation.user.length; i++) {
       array.push({ role: "User", text: eachConversation.user[i] });
       array.push({
-        role: "Soul Ai",
+        role: "Soul AI",
         text: eachConversation.ai[i] || "Sorry, did not understand your query!",
       });
     }

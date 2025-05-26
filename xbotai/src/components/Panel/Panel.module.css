@@ -51,3 +51,10 @@
   flex-direction: column;
 
 }
+.textfield{
+  padding: 8px 10px;
+  width: 80%;
+  border: 1px solid #9785BA;
+  border-radius: 5px;
+
+}

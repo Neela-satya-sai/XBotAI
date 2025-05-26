@@ -44,7 +44,7 @@ function Panel({
       for (let i = 0; i < chat.user.length; i++) {
         array.push({ role: "User", text: chat.user[i] });
         array.push({
-          role: "Soul Ai",
+          role: "Soul AI",
           text: chat.ai[i] || "Sorry, did not understand your query!",
         });
       }
@@ -119,7 +119,7 @@ function Panel({
 
   return (
     <section className={styles.panel_wrapper}>
-      <span className={styles.botai}>{history ? "Conversation History": "Bot AI"}</span>
+      <header> <div className={styles.botai}>{history ? "Conversation History": "Bot AI"}</div></header>
 
       {chat && chat.user && chat.user.length > 0 ? (
         <div>
@@ -134,15 +134,15 @@ function Panel({
               justifyContent={"space-between"}
               alignItems={"center"}
             >
-              <TextField
-                sx={{ width: "80%" }}
+              <input
+                // sx={{ width: "80%" }}
                 className={styles.textfield}
                 required
                 name={"inputText"}
                 value={userText}
                 onChange={handleInput}
-                placeholder="Message Bot AI…"
-              />
+                placeholder="Message Bot AI…" 
+              /> 
 
               <Button className={styles.button} type={"submit"}>
                 Ask
