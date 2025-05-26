@@ -210,8 +210,8 @@ function Panel({
                   justifyContent={"space-between"}
                   alignItems={"center"}
                 >
-                  <TextField
-                    sx={{ width: "80%" }}
+                  <input
+                    // sx={{ width: "80%" }}
                     className={styles.textfield}
                     required
                     name={"inputText"}
