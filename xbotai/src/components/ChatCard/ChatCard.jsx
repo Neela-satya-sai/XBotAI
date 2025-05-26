@@ -3,13 +3,13 @@ import { Box, Stack } from '@mui/material'
 import logo from "../../assets/image 29.png";
 import styles from "./ChatCard.module.css"
 
-function ChatCard() {
+function ChatCard({ role, text}) {
   return (
     <Box className={styles.chartCard_wrapper} display={"flex"} justifyContent={"flex-start"} alignItems={"center"}>
-         <img src={logo} alt="user img" />
+         <div>  <img src={logo} alt="user img" /></div>
          <Stack >
-             <span>user Name</span>
-             <p>Sorry, Did not understand your query!</p>
+             <span>{role}</span>
+             <p>{text}</p>
              <span>Time</span>
          </Stack>
     </Box>

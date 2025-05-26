@@ -32,12 +32,18 @@ function Home() {
           home
           userText={userChat}
           changeUserText={setUserChat}
+
           aiText={aiChat}
           changeAiText={setAiChat}
+
           chat={conversation}
           setChat={setCoversation}
+          
+          chatHistory = {chatHistory}
+          setChatHistory = {setChatHistory}
+
         >
-          pannel
+        
         </Panel>
       </Stack>
     </div>

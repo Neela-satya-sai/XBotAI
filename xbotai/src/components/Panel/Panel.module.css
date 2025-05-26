@@ -4,6 +4,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content:space-between;
   padding: 10px;
   
 }
@@ -40,7 +41,13 @@
 }
 .form_wrapper{
   width: 80vw;
- position: fixed;
+ /* position: fixed;  */
  bottom: 10px;
+
+}
+
+.chatCard_wrapper{
+  display: flex;
+  flex-direction: column;
 
 }

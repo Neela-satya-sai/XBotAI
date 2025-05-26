@@ -7,6 +7,7 @@ import {createTheme, ThemeProvider} from "@mui/material";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from './Home';
 import History from './History';
+import { SnackbarProvider, enqueueSnackbar} from "notistack"
 
 const router = createBrowserRouter([
   {
@@ -141,10 +142,13 @@ theme.typography.h3 = {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
+    <SnackbarProvider>
     <ThemeProvider theme={theme}>
       <RouterProvider router={router} >
       </RouterProvider>
     </ThemeProvider>
+    </SnackbarProvider>
+   
   </React.StrictMode>
 );
 
