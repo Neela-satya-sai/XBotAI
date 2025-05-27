@@ -31,11 +31,14 @@ function Panel({
   setChat,
   chatHistory,
   setChatHistory,
+  setIsOpen
 }) {
   // chat====> {user:[s1,s2,s3], ai: [s1,s2,s3] feedback:"" }
   // chatHistory ==>   [  ]
   const [final, setFinal] = useState([]);
+  
   const navigate = useNavigate();
+
 
   useEffect(() => {
     if (chat && chat.user && chat.user.length > 0) {
@@ -92,6 +95,7 @@ function Panel({
         ...prevChat.ai,
         aiAnswer?.response || "Sorry, did not understand your query!",
       ],
+    
     }));
 
     changeUserText(""); // Reset input after state update
@@ -109,7 +113,8 @@ function Panel({
       setChatHistory(updatedHistory);
       localStorage.setItem("chatHistory", JSON.stringify(updatedHistory));
     }
-    navigate("/history");
+    // navigate("/history");
+    setIsOpen(true);
     setChat({});
   }
 

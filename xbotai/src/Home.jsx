@@ -5,12 +5,15 @@ import Panel from "./components/Panel/Panel";
 import { Form } from "react-router-dom";
 import { useState, useEffect } from "react";
 import aiRes from "./data/aiResponse.json";
+import Modal from 'react-modal'
+import FeedbackForm from "./components/FeedbackForm/FeedbackForm";
 // import FormSubmit from './components/FormSubmit/FormSubmit'
 
 function Home() {
   const [userChat, setUserChat] = useState("");
   const [aiChat, setAiChat] = useState("");
   const [aiResponse, setAiResponse] = useState(aiRes); // aiRes=[]
+  const[isOpen, setIsOpen] = useState(false);
   const [chatHistory, setChatHistory] = useState([]); //[{each chathistory}, {user:[s1,s2,s3], ai: [s1,s2,s3] }]
   const [conversation, setCoversation] = useState({
     user: [],
@@ -42,10 +45,13 @@ function Home() {
           chatHistory = {chatHistory}
           setChatHistory = {setChatHistory}
 
+          setIsOpen={setIsOpen}
+
         >
         
         </Panel>
       </Stack>
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen}> <FeedbackForm></FeedbackForm></Modal>
     </div>
   );
 }
