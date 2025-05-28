@@ -43,7 +43,7 @@ export default function ChattingCard({ details, showFeedbackModal, updateChat, s
                     opacity: 1
                 }
             }}
-            bgcolor={readOnly ? 'primary.main' : 'primary.light'}
+             bgcolor={readOnly ? 'primary.main' : 'primary.light'}
         >
             <Box
                 component={'img'}
@@ -84,7 +84,7 @@ export default function ChattingCard({ details, showFeedbackModal, updateChat, s
                         <Stack
                             direction={'row'}
                             visibility={{ xs: 'visible', md: 'hidden' }}
-                            sx={{ opacity: { xs: 1, md: 0 }, transition: 'opacity 400ms ease' }}
+                            // sx={{ opacity: { xs: 1, md: 0 }, transition: 'opacity 400ms ease' }}
                             className='feedback-btns'
                         >
                             <IconButton

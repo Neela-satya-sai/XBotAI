@@ -19,7 +19,7 @@ export default function Sidebar({ setChat, closeMenu }) {
         <Box >
 
 
-            {isMobile && (
+            {/* {isMobile && (
                 <Button
                     endIcon={<CloseIcon />}
                     sx={{
@@ -31,7 +31,7 @@ export default function Sidebar({ setChat, closeMenu }) {
                 >
                     Close
                 </Button>
-            )}
+            )} */}
 
             <Link to={'/'} style={{ textDecoration: 'none' }}>
                 <Stack

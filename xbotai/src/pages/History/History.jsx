@@ -20,21 +20,21 @@ export default function History() {
     return (
         <Box
             height={'100vh'}
-            overflow={'hidden'}
-            sx={{
-                overflowY: 'auto',
-                '&::-webkit-scrollbar': {
-                    width: '10px',
-                },
-                '&::-webkit-scrollbar-track': {
-                    boxShadow: 'inset 0 0 8px rgba(0,0,0,0.1)',
-                    borderRadius: '8px'
-                },
-                '&::-webkit-scrollbar-thumb': {
-                    backgroundColor: 'rgba(151, 133, 186,0.4)',
-                    borderRadius: '8px'
-                }
-            }}
+            // overflow={'hidden'}
+            // sx={{
+            //     overflowY: 'auto',
+            //     '&::-webkit-scrollbar': {
+            //         width: '10px',
+            //     },
+            //     '&::-webkit-scrollbar-track': {
+            //         boxShadow: 'inset 0 0 8px rgba(0,0,0,0.1)',
+            //         borderRadius: '8px'
+            //     },
+            //     '&::-webkit-scrollbar-thumb': {
+            //         backgroundColor: 'rgba(151, 133, 186,0.4)',
+            //         borderRadius: '8px'
+            //     }
+            // }}
         >
 
             <Navbar />
@@ -50,7 +50,7 @@ export default function History() {
                     <Typography
                         textAlign={'center'}
                         p={3}
-                        bgcolor={'primary.light'}
+                        // bgcolor={'primary.light'}
                         borderRadius={2}
                     >
                         No saved chats.
@@ -61,7 +61,7 @@ export default function History() {
                     <Typography
                         textAlign={'center'}
                         p={3}
-                        bgcolor={'primary.light'}
+                        // bgcolor={'primary.light'}
                         borderRadius={2}
                     >
                         No such chats.
@@ -71,7 +71,7 @@ export default function History() {
                 {filteredChats.length > 0 && (
                     <Stack
                         spacing={4}
-                        divider={<Divider sx={{ borderColor: 'primary.bg', opacity: 0.4 }} />}
+                        // divider={<Divider sx={{ borderColor: 'primary.bg', opacity: 0.4 }} />}
                     >
                         {filteredChats.map((item, index) => (
                             <ChatHistoryCard details={item} key={index} />

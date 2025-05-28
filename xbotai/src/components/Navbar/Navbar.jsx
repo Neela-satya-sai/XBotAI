@@ -48,13 +48,13 @@ export default function Navbar() {
                 spacing={0.2}
                 alignItems={'center'}
             >
-                <Typography
+                {/* <Typography
                     textTransform={'capitalize'}
                     fontSize={10}
                 >
                     {mode}
-                </Typography>
-                <IconButton onClick={() =>
+                </Typography> */}
+                {/* <IconButton onClick={() =>
                     setMode(prev => {
                         if (prev == 'light') {
                             return 'dark'
@@ -72,7 +72,7 @@ export default function Navbar() {
                             <Brightness7Icon />
                         )
                     }
-                </IconButton>
+                </IconButton> */}
             </Stack>
 
         </Stack>

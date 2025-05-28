@@ -59,11 +59,11 @@ export default function Home() {
         <Stack
             height={'100vh'}
             justifyContent={'space-between'}
-            sx={{
-                '@media (max-width:767px)': {
-                    background: mode == 'light' ? 'linear-gradient(#F9FAFA 60%, #EDE4FF)' : ''
-                }
-            }}
+            // sx={{
+            //     '@media (max-width:767px)': {
+            //         background: mode == 'light' ? 'linear-gradient(#F9FAFA 60%, #EDE4FF)' : ''
+            //     }
+            // }}
         >
 
             <Navbar />
@@ -73,7 +73,7 @@ export default function Home() {
             {chat.length > 0 && (
                 <Stack
                     height={1}
-                    flexGrow={0}
+                    // flexGrow={0}
                     p={{ xs: 2, md: 3 }}
                     spacing={{ xs: 2, md: 3 }}
                     sx={{
