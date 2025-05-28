@@ -1,35 +1,80 @@
-import React from "react";
-import styles from "./Navbar.module.css";
-import { Stack, Button } from "@mui/material";
-// import Link from "react-router-dom";
-import { Link } from "react-router-dom";
-import logo from "../../assets/image 29.png";
-import pencile from "../../assets/image 31.png";
+import { Typography, Stack, IconButton, useMediaQuery } from '@mui/material'
+import { Link, useOutletContext } from "react-router-dom";
+import MenuIcon from '@mui/icons-material/Menu';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { ThemeContext } from '../../theme/ThemeContext';
+import { useContext } from 'react';
 
-function Navbar() {
-  return (
-    <nav className={styles.navbar_wrapper}>
-      <Stack className={styles.navItems}>
-        <Stack direction={"row"} className={styles.newChat_wrapper}>
-          {" "}
-          <img src={logo} alt="logo img" className={styles.logo} />{" "}
-          <Link to="/" className={styles.newChat}>
-            <span>New Chat</span>
-          </Link>
-          <img src={pencile} alt="pencile icon" className={styles.pencile} />{" "}
-        </Stack>
+export default function Navbar() {
 
-        <Button
-          component={Link}
-          to="/history"
-          className={styles.buttonHistory}
-          sx={{ textDecoration: "none" }}
+    const { handleMobileMenu } = useOutletContext();
+    const isMobile = useMediaQuery('(max-width:800px)')
+    const { setMode, mode } = useContext(ThemeContext)
+
+    return (
+        <Stack
+            component={'header'}
+            p={{ xs: 2, md: 3 }}
+            direction={'row'}
+            alignItems={'center'}
+            justifyContent={'space-between'}
         >
-          Past Conversation
-        </Button>
-      </Stack>
-    </nav>
-  );
-}
 
-export default Navbar;
+            <Stack
+                direction={'row'}
+                alignItems={'center'}
+                spacing={2}
+            >
+
+                {isMobile && (
+                    <MenuIcon
+                        onClick={() => handleMobileMenu(prev => !prev)}
+                    />)
+                }
+
+                <Link to={'/'} style={{ textDecoration: 'none' }}>
+                    <Typography
+                        variant='h1'
+                        component={'h1'}
+                    >
+                        Bot AI
+                    </Typography>
+                </Link>
+            </Stack>
+
+            <Stack
+                direction={'row'}
+                spacing={0.2}
+                alignItems={'center'}
+            >
+                <Typography
+                    textTransform={'capitalize'}
+                    fontSize={10}
+                >
+                    {mode}
+                </Typography>
+                <IconButton onClick={() =>
+                    setMode(prev => {
+                        if (prev == 'light') {
+                            return 'dark'
+                        }
+                        else {
+                            return 'light'
+                        }
+                    })
+                }>
+                    {mode == "light"
+                        ? (
+                            <Brightness4Icon />
+                        )
+                        : (
+                            <Brightness7Icon />
+                        )
+                    }
+                </IconButton>
+            </Stack>
+
+        </Stack>
+    )
+}
